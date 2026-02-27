@@ -1,0 +1,64 @@
+# pulsar-dmypy
+
+Incremental MyPy integration for Pulsar using `dmypy`.
+
+Created by iFA.  
+Initial implementation was AI-assisted and refined manually.
+
+## ⚠ Platform Support
+
+Currently **Linux-only**.
+
+The plugin relies on filesystem symlinks for the shadow project system.  
+Windows is not supported (unless using WSL).
+
+macOS may work but is not officially tested.
+
+## Features
+
+- Uses `dmypy` daemon for fast incremental type checking
+- Shadow project overlay (symlink-based)
+- Supports unsaved buffers
+- Real-time linting with debounce
+- Only shows errors for the active file
+- Fully integrated with Pulsar Linter API
+
+## Requirements
+
+- Python 3
+- `mypy`
+- `dmypy` available in PATH
+- Pulsar Linter package installed
+- Linux filesystem with symlink support
+
+## How It Works
+
+The plugin creates a shadow project directory:
+.pulsar_dmypy_cache
+
+
+Inside this directory:
+
+- All Python files are symlinked
+- Open editors are written with in-memory content
+- `dmypy run` executes inside the shadow project
+
+This allows:
+
+- Full project type checking
+- Unsaved buffer support
+- Incremental performance
+
+## Limitations
+
+- Full shadow tree rebuild on each lint (optimized for small projects)
+- Linux-only due to symlink dependency
+
+## License
+
+MIT
+
+## Author
+
+iFA  
+https://github.com/iFA88

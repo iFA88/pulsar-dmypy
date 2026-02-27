@@ -1,0 +1,37 @@
+{
+  "name": "pulsar-dmypy",
+  "main": "./lib/pulsar-dmypy",
+  "version": "0.1.0",
+  "description": "Linux-only dmypy-based incremental MyPy integration for Pulsar with shadow project support (AI-assisted implementation)."
+  "author": "iFA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iFA88/pulsar-dmypy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iFA88/pulsar-dmypy/issues"
+  },
+  "homepage": "https://github.com/iFA88/pulsar-dmypy",
+  "keywords": [
+    "python",
+    "mypy",
+    "dmypy",
+    "linter",
+    "pulsar",
+    "type-checking"
+  ],
+  "engines": {
+    "atom": ">=1.0.0"
+  },
+  "activationHooks": [
+    "core:loaded-shell-environment"
+  ],
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "2.0.0": "provideLinter"
+      }
+    }
+  }
+}
