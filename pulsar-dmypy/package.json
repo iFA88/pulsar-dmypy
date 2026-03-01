@@ -2,7 +2,7 @@
   "name": "pulsar-dmypy",
   "main": "./lib/pulsar-dmypy",
   "version": "0.1.0",
-  "description": "Linux-only dmypy-based incremental MyPy integration for Pulsar with shadow project support (AI-assisted implementation)."
+  "description": "Linux-only dmypy-based incremental MyPy integration for Pulsar with shadow project support (AI-assisted implementation).",
   "author": "iFA",
   "license": "MIT",
   "repository": {
