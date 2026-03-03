@@ -173,7 +173,7 @@ module.exports = {
 
 	runDmypy(shadowRoot) {
 		return new Promise(resolve => {
-			const proc = spawn('dmypy', ['run', '--', '.'], { cwd: shadowRoot });
+			const proc = spawn('dmypy', ['run', '--', '--strict', '.'], { cwd: shadowRoot });
 			let output = '';
 			proc.stdout.on('data', data => output += data.toString());
 			proc.stderr.on('data', data => output += data.toString());
@@ -209,7 +209,7 @@ module.exports = {
 
 					const messages = [];
 					const lines = output.split('\n');
-					const regex = /^(.+?):(\d+):(?:(\d+):)?\s*error:\s*(.+)$/;
+					const regex = /^(.+?):(\d+):(?:(\d+):)?\s*(error|note|warning):\s*(.+)$/;
 					const shadowFile = path.resolve(
 						project.shadowRoot,
 						path.relative(projectRoot, filePath)
@@ -224,10 +224,15 @@ module.exports = {
 
 						const row = parseInt(match[2]) - 1;
 						const col = match[3] ? parseInt(match[3]) - 1 : 0;
-						const message = match[4];
+						const severityRaw = match[4];
+						const message = match[5];
+
+						let severity = 'error';
+						if (severityRaw === 'note') severity = 'info';
+						if (severityRaw === 'warning') severity = 'warning';
 
 						messages.push({
-							severity: 'error',
+							severity,
 							location: {
 								file: filePath,
 								position: [[row, col], [row, col + 1]]
